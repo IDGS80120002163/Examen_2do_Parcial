@@ -1,0 +1,42 @@
+<div class="container mt-4">
+  <div class="card">
+    <h1>Instrumentos Musicales</h1>
+
+    <form>
+      <div class="form-group">
+        <label>Nombre del Instrumentos</label>
+        <input type="text" [(ngModel)]="nombre" [ngModelOptions]="{standalone: true}" 
+          class="form-control" id="nombre" placeholder="Nueva Tarea"/>
+        <button type="submit" class="btn bt-primary mt-4" (click)="guardar()">Guardar</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="container mt-4">
+    <h1>Lista de Tareas</h1>
+    <div *ngIf="!isResultLoaded">
+      <h1>Cargando Datos...</h1>
+    </div>
+    <div *ngIf="isResultLoaded">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Tareas</th>
+            <th scope="col">&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let tarea of listaTareas">
+            <td>{{tarea.idTarea}}</td>
+            <td>{{tarea.nombre}}</td>
+            <td>
+              <button type="button" class="btn btn-success" (click)="obtenerTarea(tarea)">Editar</button>
+              <button type="button" class="btn btn-danger" (click)="eliminarTarea(tarea)">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
