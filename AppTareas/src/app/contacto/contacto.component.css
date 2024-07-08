@@ -1,0 +1,46 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  nav a {
+    margin-right: 10px;
+    text-decoration: none;
+  }
+  
+  .contact-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .contact-form, .contact-info {
+    width: 45%;
+  }
+  
+  .contact-form h2, .contact-info h2 {
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .form-group input, .form-group textarea {
+    width: 48%;
+  }
+  
+  .form-group textarea {
+    width: 100%;
+    resize: none;
+  }
+  
+  .btn {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+  }
+  

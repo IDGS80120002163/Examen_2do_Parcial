@@ -1,0 +1,58 @@
+<div class="container mt-4">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card form-section">
+          <h1>Instrumentos Musicales</h1>
+          <form (ngSubmit)="guardar()">
+            <div class="form-group">
+              <label>Nombre del Instrumento</label>
+              <input type="text" [(ngModel)]="nombreProducto" [ngModelOptions]="{standalone: true}" 
+                class="form-control" id="nombreProducto" placeholder="Nuevo Producto" name="nombreProducto" />
+            </div>
+            <div class="form-group">
+              <label>Descripción</label>
+              <input type="text" [(ngModel)]="descripcionActual" [ngModelOptions]="{standalone: true}" 
+                class="form-control" id="descripcionActual" placeholder="Descripción" name="descripcionActual" />
+            </div>
+            <div class="form-group">
+              <label>Precio</label>
+              <input type="number" [(ngModel)]="precioActual" [ngModelOptions]="{standalone: true}" 
+                class="form-control" id="precioActual" placeholder="Precio" name="precioActual" />
+            </div>
+            <div class="form-group">
+              <label>Categoría</label>
+              <select [(ngModel)]="IDCategoriaActual" class="form-control" id="IDCategoriaActual" name="IDCategoriaActual">
+                <option *ngFor="let categoria of categorias" [value]="categoria.idCategoria">{{ categoria.nombre }}</option>
+              </select>
+            </div>      
+            <div class="form-group">
+              <label>Imagen</label>
+              <input type="file" (change)="onFileSelected($event)" class="form-control" id="imagenActual" name="imagenActual" />
+            </div>
+            <button type="submit" class="btn btn-primary mt-4">Guardar</button>
+          </form>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <h1>Lista de Productos</h1>
+        <div *ngIf="!isResultLoaded">
+          <h1>Cargando Datos...</h1>
+        </div>
+        <div *ngIf="isResultLoaded">
+          <div class="card-columns">
+            <div class="card" *ngFor="let producto of listaProductos">
+              <img [src]="producto.imagen" class="card-img-top" alt="{{producto.nombre}}">
+              <div class="card-body">
+                <h5 class="card-title">{{producto.nombre}}</h5>
+                <p class="card-text">{{producto.descripcion}}</p>
+                <p class="card-text"><strong>Precio:</strong> ${{producto.precio}} MXN</p>
+                <button type="button" class="btn btn-success" (click)="obtenerProducto(producto)">Editar</button>
+                <button type="button" class="btn btn-danger" (click)="eliminarProducto(producto)">Eliminar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>  
+  </div>
+  

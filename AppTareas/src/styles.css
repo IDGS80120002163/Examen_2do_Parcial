@@ -1,0 +1,18 @@
+.card {
+    margin-bottom: 20px;
+  }
+  .card img {
+    max-height: 200px;
+    object-fit: contain;
+  }
+  .form-section {
+    margin-bottom: 20px;
+  }
+  .card-columns {
+    column-count: 3;
+  }  
+
+  nav a {
+    margin-right: 10px;
+    text-decoration: none;
+  }
