@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Examen_2do_Parcial_Back.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class ProductosController : ControllerBase
     {
         //Creando la variable de context de BD
@@ -22,6 +24,41 @@ namespace Examen_2do_Parcial_Back.Controllers
         {
             var listaProductos = await _baseDatos.Productos.ToListAsync();
             return Ok(listaProductos);
+        }
+
+        //Método GET ListaCategorias que devuelve la lista de todas las tareas en la BD
+        [HttpGet]
+        [Route("ListaCategorias")]
+        public async Task<IActionResult> ListaC()
+        {
+            var listaCategorias = await _baseDatos.Categoria.ToListAsync();
+            return Ok(listaCategorias);
+        }
+
+        [HttpGet]
+        [Route("BuscarProductoPorNombre/{nombre}")]
+        public async Task<IActionResult> BuscarPorNombre(string nombre)
+        {
+            var productos = await _baseDatos.Productos
+                                             .Where(p => p.Nombre.Contains(nombre))
+                                             .ToListAsync();
+
+            if (productos == null || !productos.Any())
+            {
+                return NotFound("No se encontraron productos con ese nombre");
+            }
+
+            return Ok(productos);
+        }
+
+        [HttpGet]
+        [Route("BuscarProductoPorCategoria/{idCategoria:int}")]
+        public async Task<IActionResult> BuscarPorCategoria(int idCategoria)
+        {
+            var productos = await _baseDatos.Productos
+                                .Where(p => p.IdCaterogia == idCategoria)
+                                .ToListAsync();
+            return Ok(productos);
         }
 
         [HttpPost]
