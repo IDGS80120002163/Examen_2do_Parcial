@@ -63,12 +63,21 @@ export class AppComponent {
     });
   }
 
-  filtrarProductos(event: Event) {
-    const input = event.target as HTMLInputElement;
-    const query = input.value.toLowerCase();
+  filtrarProductos(event: any) {
+    const query = event.target.value.toLowerCase();
     this.listaProductosFiltrada = this.listaProductos.filter(producto =>
       producto.nombre.toLowerCase().includes(query)
     );
-  }  
-  
+  }
+
+  filtrarPorCategoria(idCategoria: number) {
+    this._productoService.getByCategoria(idCategoria).subscribe({
+      next: (data) => {
+        this.listaProductosFiltrada = data.map(producto => ({
+          ...producto,
+          imagen: producto.imagen ? `data:image/png;base64,${producto.imagen}` : ''
+        }));
+      }, error: (e) => { console.log(e) }
+    });
+  }
 }

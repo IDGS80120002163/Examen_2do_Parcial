@@ -25,6 +25,19 @@
       <div class="banner mb-4">
         <img src="assets/lonches_music.png" alt="Banner de la Tienda" class="img-fluid banner-img">
       </div>
+      <div class="categories mb-4">
+        <h4>Categorías</h4>
+        <div class="btn-group-vertical w-100">
+          <button class="btn btn-outline-primary mb-2" (click)="obtenerProductos()">
+            Todas las categorías
+          </button>
+          <button *ngFor="let categoria of categorias" 
+                  class="btn btn-outline-primary mb-2" 
+                  (click)="filtrarPorCategoria(categoria.idCategoria)">
+            {{categoria.nombre}}
+          </button>
+        </div>
+      </div>
     </div>
     <div class="col-md-9">
       <h1>Lista de Productos</h1>
@@ -33,7 +46,7 @@
       </div>
       <div *ngIf="isResultLoaded">
         <div class="row">
-          <div class="col-md-4 mb-4" *ngFor="let producto of listaProductos">
+          <div class="col-md-4 mb-4" *ngFor="let producto of listaProductosFiltrada">
             <div class="card h-100">
               <img [src]="producto.imagen" class="card-img-top" alt="{{producto.nombre}}">
               <div class="card-body">
